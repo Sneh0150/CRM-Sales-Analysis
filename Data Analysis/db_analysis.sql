@@ -193,7 +193,7 @@ WHERE account_id IS NULL;
 
 # 1) Which sectors generate the most revenue and have the highest success rates?
 SELECT a.sector,
-		SUM(CASE WHEN sp.deal_stage = 'Won' THEN sp.close_value ELSE 0 END) AS sales_revenue,
+		SUM(close_value) AS sales_revenue,
 		ROUND((	SUM(CASE WHEN sp.deal_stage = 'Won' THEN 1 ELSE 0 END) /
 				SUM(CASE WHEN sp.deal_stage IN ('Won','Lost') THEN 1 ELSE 0 END))*100, 2) AS success_rate_pct
 FROM sales_pipeline sp
